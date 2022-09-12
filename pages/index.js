@@ -31,8 +31,8 @@ export default function Home() {
           Calculator costuri/profit eMag
         </h1>
 
-        <div className='flex flex-col justify-center pt-5'>
-          <div className='flex flex-row justify-center pb-2'>
+        <div className='w-full flex flex-row justify-center pt-5'>
+          <div className='flex flex-col justify-center pb-2'>
             <div className='pr-2'>
               <label className="block" htmlFor="pretVanzare">
                 <span className="block text-sm font-medium text-slate-700">Pret vanazare produs:</span>
@@ -45,8 +45,8 @@ export default function Home() {
                 <input value={numarProduse} onChange={e => setNumarProduse(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Numar Produse" name='numarProduse' />
               </label>
             </div>
-          </div>
-          <div className='flex flex-row justify-center pb-2'>
+          
+          
             <div className='pr-2'>
               <label className="block" htmlFor="pretVanzare">
                 <span className="block text-sm font-medium text-slate-700">Cost achizitie produs:</span>
@@ -59,8 +59,8 @@ export default function Home() {
                 <input value={costTransport} onChange={e => setCostTransport(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost transport" name='costTransport' />
               </label>
             </div>
-          </div>
-          <div className='flex flex-row justify-center pb-2'>
+          
+          
             <div className='pr-2'>
               <label className="block">
                 <span className="block text-sm font-medium text-slate-700">Comision eMag %:</span>
@@ -73,8 +73,8 @@ export default function Home() {
                 <input value={costTransportAchizitie} onChange={e => setCostTransportAchizitie(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost transport achizitie" />
               </label>
             </div>
-          </div>
-          <div className='flex flex-row justify-center pb-2'>
+          
+          
             <div className='pr-2'>
               <label className="block">
                 <span className="block text-sm font-medium text-slate-700">Cost contabilitate:</span>
@@ -87,8 +87,8 @@ export default function Home() {
                 <input value={costLogistica} onChange={e => setCostLogistica(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost logistica" />
               </label>
             </div>
-          </div>
-          <div className='flex flex-row justify-center pb-2'>
+          
+          
             <div className='pr-2'>
               <label className="block">
                 <span className="block text-sm font-medium text-slate-700">Cost marketing:</span>
@@ -102,7 +102,7 @@ export default function Home() {
               </label>
             </div>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col sticky'>
             <p className='text-amber-300'>Total Incasari: {totalIncasari} RON</p>
             <p className='text-red-600'>Costuri: {(pretVanzare) * 0.25} RON</p>
             <p className='text-green-900'>Profit Brut:</p>
