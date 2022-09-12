@@ -31,7 +31,8 @@ export default function Home() {
           Calculator costuri/profit eMag
         </h1>
 
-        <div className='w-full flex flex-row justify-center pt-5'>
+        <div className='flex flex-row overflow-auto justify-center pt-5'>
+
           <div className='flex flex-col justify-center pb-2'>
             <div className='pr-2'>
               <label className="block" htmlFor="pretVanzare">
@@ -102,7 +103,8 @@ export default function Home() {
               </label>
             </div>
           </div>
-          <div className='flex flex-col sticky'>
+
+          <div className='flex-col sticky top-0 self-start'>
             <p className='text-amber-300'>Total Incasari: {totalIncasari} RON</p>
             <p className='text-red-600'>Costuri: {(pretVanzare) * 0.25} RON</p>
             <p className='text-green-900'>Profit Brut:</p>
@@ -111,6 +113,7 @@ export default function Home() {
               return ('IIFE');
             })()}</p>
           </div>
+
         </div>
 
 

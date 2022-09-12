@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+input{
+  background-color: dimgray;
+}
+
 * {
   box-sizing: border-box;
 }
