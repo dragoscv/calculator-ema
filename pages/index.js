@@ -9,14 +9,28 @@ export default function Home() {
   const [numarProduse, setNumarProduse] = React.useState(1);
   const [costTransport, setCostTransport] = React.useState(17);
   const [costAchizitie, setCostAchizitie] = React.useState(0);
-  const [costTransportAchizitie, setCostTransportAchizitie] = React.useState(0);
+  const [costTransportAchizitie, setCostTransportAchizitie] = React.useState(0.5);
   const [comisionEmag, setComisionEmag] = React.useState(20);
   const [costContabilitate, setCostContabilitate] = React.useState(0.5);
   const [costLogistica, setCostLogistica] = React.useState(0.5);
   const [costMarketing, setCostMarketing] = React.useState(0.5);
   const [costPlataRamburs, setCostPlataRamburs] = React.useState(0.5);
+  const impozit = 0.01;
+  const [euroToRon, setEuroToRon] = React.useState(0);
+
+  React.useEffect(() => {
+    fetch('https://open.er-api.com/v6/latest/EUR')
+      .then(response => response.json())
+      .then(data => setEuroToRon(data.rates.RON));
+  }, []);;
 
   const totalIncasari = (new Number(pretVanzare) + new Number(costTransport)) * new Number(numarProduse);
+  const totalCosturi = (new Number(costAchizitie) + new Number(costTransportAchizitie) + new Number(comisionEmag) + new Number(costContabilitate) + new Number(costLogistica) + new Number(costMarketing) + new Number(costPlataRamburs)) * new Number(numarProduse);
+  const profit = totalIncasari - totalCosturi;
+  const profitNet = new Number(profit * impozit).toFixed(2);
+  const profitNetEURO = new Number(profitNet / euroToRon).toFixed(2);
+  
+
 
   return (
     <div className={styles.container}>
@@ -106,12 +120,13 @@ export default function Home() {
 
           <div className='flex-col sticky top-0 self-start'>
             <p className='text-amber-300'>Total Incasari: {totalIncasari} RON</p>
-            <p className='text-red-600'>Costuri: {(pretVanzare) * 0.25} RON</p>
-            <p className='text-green-900'>Profit Brut:</p>
-            <p className='text-green-500'>Profit Net impozit: {(pretVanzare) * 0.75} RON</p>
-            <p>{(function () {
+            <p className='text-red-600'>Costuri: {totalCosturi} RON</p>
+            <p className='text-green-900'>Profit Brut: {profit} RON</p>
+            <p className='text-green-500'>Profit Net impozit {impozit}%: {profitNet} RON</p>
+            <p className='text-green-500'>Profit Net EURO: {profitNetEURO} €</p>
+            {/* <p>{(function () {
               return ('IIFE');
-            })()}</p>
+            })()}</p> */}
           </div>
 
         </div>
