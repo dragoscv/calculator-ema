@@ -5,8 +5,18 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   //calculator costuri emag
-  const [pretVanzare, setPretVanzare] = React.useState(0);
-  const [costTransport, setCostTransport] = React.useState(0);
+  const [pretVanzare, setPretVanzare] = React.useState(1);
+  const [numarProduse, setNumarProduse] = React.useState(1);
+  const [costTransport, setCostTransport] = React.useState(17);
+  const [costAchizitie, setCostAchizitie] = React.useState(0);
+  const [costTransportAchizitie, setCostTransportAchizitie] = React.useState(0);
+  const [comisionEmag, setComisionEmag] = React.useState(20);
+  const [costContabilitate, setCostContabilitate] = React.useState(0.5);
+  const [costLogistica, setCostLogistica] = React.useState(0.5);
+  const [costMarketing, setCostMarketing] = React.useState(0.5);
+  const [costPlataRamburs, setCostPlataRamburs] = React.useState(0.5);
+
+  const totalIncasari = (new Number(pretVanzare) + new Number(costTransport)) * new Number(numarProduse);
 
   return (
     <div className={styles.container}>
@@ -17,28 +27,91 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className='text-5xl font-bold'>
           Calculator costuri/profit eMag
         </h1>
 
-        <p className={styles.description}>
-          <div className='flex flex-col'>
-            <div>
-              <label htmlFor="price">Pret vanazare produs:</label>
+        <div className='flex flex-col justify-center pt-5'>
+          <div className='flex flex-row justify-center pb-2'>
+            <div className='pr-2'>
+              <label className="block" htmlFor="pretVanzare">
+                <span className="block text-sm font-medium text-slate-700">Pret vanazare produs:</span>
+                <input value={pretVanzare} onChange={e => setPretVanzare(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Pret vanzare produs" name='pretVanzare' />
+              </label>
             </div>
-            <div className='p-2'>
-              <input onChange={e => setPretVanzare(e.target.value)} type="number" placeholder="Pret vanzare produs" />
+            <div className=''>
+              <label className="block" htmlFor="numarProduse">
+                <span className="block text-sm font-medium text-slate-700">Numar Produse: </span>
+                <input value={numarProduse} onChange={e => setNumarProduse(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Numar Produse" name='numarProduse' />
+              </label>
             </div>
-            <div className='p-2'>
-              <input onChange={e => setCostTransport(e.target.value)} type="number" placeholder="Cost transport" />
-            </div>
-            <p>Costuri: {pretVanzare * 0.25} RON</p>
-            <p>Profit: {pretVanzare * 0.75} RON</p>
-            {/* <p>{(function () {
-              console.log('IIFE');
-            })()}</p> */}
           </div>
-        </p>
+          <div className='flex flex-row justify-center pb-2'>
+            <div className='pr-2'>
+              <label className="block" htmlFor="pretVanzare">
+                <span className="block text-sm font-medium text-slate-700">Cost achizitie produs:</span>
+                <input value={costAchizitie} onChange={e => setCostAchizitie(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost achizitie produs" name='pretAchizitie' />
+              </label>
+            </div>
+            <div className=''>
+              <label className="block" htmlFor="costTransport">
+                <span className="block text-sm font-medium text-slate-700">Cost Transport: </span>
+                <input value={costTransport} onChange={e => setCostTransport(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost transport" name='costTransport' />
+              </label>
+            </div>
+          </div>
+          <div className='flex flex-row justify-center pb-2'>
+            <div className='pr-2'>
+              <label className="block">
+                <span className="block text-sm font-medium text-slate-700">Comision eMag %:</span>
+                <input value={comisionEmag} onChange={e => setComisionEmag(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Comision eMag %" />
+              </label>
+            </div>
+            <div className=''>
+              <label className="block" htmlFor="costTransport">
+                <span className="block text-sm font-medium text-slate-700">Cost transport achizitie:</span>
+                <input value={costTransportAchizitie} onChange={e => setCostTransportAchizitie(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost transport achizitie" />
+              </label>
+            </div>
+          </div>
+          <div className='flex flex-row justify-center pb-2'>
+            <div className='pr-2'>
+              <label className="block">
+                <span className="block text-sm font-medium text-slate-700">Cost contabilitate:</span>
+                <input value={costContabilitate} onChange={e => setCostContabilitate(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Comision Contabilitate" />
+              </label>
+            </div>
+            <div className=''>
+              <label className="block">
+                <span className="block text-sm font-medium text-slate-700">Cost logistica</span>
+                <input value={costLogistica} onChange={e => setCostLogistica(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost logistica" />
+              </label>
+            </div>
+          </div>
+          <div className='flex flex-row justify-center pb-2'>
+            <div className='pr-2'>
+              <label className="block">
+                <span className="block text-sm font-medium text-slate-700">Cost marketing:</span>
+                <input value={costMarketing} onChange={e => setCostMarketing(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Comision Marketing" />
+              </label>
+            </div>
+            <div className=''>
+              <label className="block">
+                <span className="block text-sm font-medium text-slate-700">Cost plata ramburs</span>
+                <input value={costPlataRamburs} onChange={e => setCostPlataRamburs(e.target.value)} onFocus={e => event.target.select()} type="number" placeholder="Cost plata ramburs" />
+              </label>
+            </div>
+          </div>
+          <div className='flex flex-col'>
+            <p className='text-amber-300'>Total Incasari: {totalIncasari} RON</p>
+            <p className='text-red-600'>Costuri: {(pretVanzare) * 0.25} RON</p>
+            <p className='text-green-900'>Profit Brut:</p>
+            <p className='text-green-500'>Profit Net impozit: {(pretVanzare) * 0.75} RON</p>
+            <p>{(function () {
+              return ('IIFE');
+            })()}</p>
+          </div>
+        </div>
 
 
       </main>
