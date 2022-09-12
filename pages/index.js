@@ -10,7 +10,7 @@ export default function Home() {
   const [costTransport, setCostTransport] = React.useState(17);
   const [costAchizitie, setCostAchizitie] = React.useState(0);
   const [costTransportAchizitie, setCostTransportAchizitie] = React.useState(0.5);
-  const [comisionEmag, setComisionEmag] = React.useState(20);
+  const [comisionEmag, setComisionEmag] = React.useState(25);
   const [costContabilitate, setCostContabilitate] = React.useState(0.5);
   const [costLogistica, setCostLogistica] = React.useState(0.5);
   const [costMarketing, setCostMarketing] = React.useState(0.5);
@@ -25,9 +25,12 @@ export default function Home() {
   }, []);;
 
   const totalIncasari = (new Number(pretVanzare) + new Number(costTransport)) * new Number(numarProduse);
-  const totalCosturi = (new Number(costAchizitie) + new Number(costTransportAchizitie) + new Number(comisionEmag) + new Number(costContabilitate) + new Number(costLogistica) + new Number(costMarketing) + new Number(costPlataRamburs)) * new Number(numarProduse);
-  const profit = totalIncasari - totalCosturi;
-  const profitNet = profit - new Number(profit * impozit).toFixed(2);
+  const costComisionEmag = totalIncasari * new Number(comisionEmag)/100;
+  const costImpozit = totalIncasari * impozit;
+  const costTotal = ((new Number(costAchizitie) + new Number(costTransportAchizitie) + new Number(costContabilitate) + new Number(costLogistica) + new Number(costMarketing) + new Number(costPlataRamburs)) * new Number(numarProduse) + costComisionEmag + costImpozit).toFixed(2);
+
+  const profit = new Number(totalIncasari - costTotal).toFixed(2);
+  const profitNet = (profit - new Number(profit * impozit)).toFixed(2);
   const profitNetEURO = new Number(profitNet / euroToRon).toFixed(2);
   
 
@@ -120,7 +123,7 @@ export default function Home() {
 
           <div className='flex-col sticky top-0 self-start'>
             <p className='text-amber-300'>Total Incasari: {totalIncasari} RON</p>
-            <p className='text-red-600'>Costuri: {totalCosturi} RON</p>
+            <p className='text-red-600'>Costuri: {costTotal} RON</p>
             <p className='text-green-900'>Profit Brut: {profit} RON</p>
             <p className='text-green-500'>Profit Net impozit {impozit}%: {profitNet} RON</p>
             <p className='text-green-500'>Profit Net EURO: {profitNetEURO} €</p>
