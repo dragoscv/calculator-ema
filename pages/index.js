@@ -27,7 +27,7 @@ export default function Home() {
   const totalIncasari = (new Number(pretVanzare) + new Number(costTransport)) * new Number(numarProduse);
   const totalCosturi = (new Number(costAchizitie) + new Number(costTransportAchizitie) + new Number(comisionEmag) + new Number(costContabilitate) + new Number(costLogistica) + new Number(costMarketing) + new Number(costPlataRamburs)) * new Number(numarProduse);
   const profit = totalIncasari - totalCosturi;
-  const profitNet = new Number(profit * impozit).toFixed(2);
+  const profitNet = profit - new Number(profit * impozit).toFixed(2);
   const profitNetEURO = new Number(profitNet / euroToRon).toFixed(2);
   
 
